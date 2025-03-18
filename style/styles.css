@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.input-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+input {
+    padding: 10px;
+    width: 80%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.barcode-list-container {
+    width: 80%;
+    max-width: 600px;
+    max-height: 400px; /* Ограничиваем высоту списка */
+    overflow-y: auto; /* Добавляем прокрутку */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.barcode-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.print-button {
+    margin-bottom: 20px;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .barcode-list-container, .barcode-list-container * {
+        visibility: visible;
+    }
+    .barcode-list-container {
+        position: absolute;
+        left: auto;
+        top: auto;
+        width: 100%;
+        
+        max-height: none;
+        overflow: visible;
+    }
+    .barcode-item {
+        page-break-inside: avoid; /* Избегаем разрыва штрих-кодов на страницах */
+    }
+}
