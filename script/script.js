@@ -30,7 +30,9 @@ function addBarcode() {
     console.log(typeof(input));
     const regex = /^[\x00-\x7F]+$/;
     
-    if (regex.test(input)) {
+    console.log(input.length);
+    
+    if (regex.test(input) && input.length <= 30) {
         // Создаем контейнер для нового штрих-кода
         const barcodeItem = document.createElement('div');
         const deleteButton = document.createElement('button');
@@ -77,6 +79,10 @@ function addBarcode() {
         }
         // Проверяем контейнер после добавления
         checkContainer(container, barcodeList);
+    } else if (input.length >= 30) {
+        alert("Пожалуйста, введите текст до 30 символов!");
+    } else if (!regex.test(input)) {
+        alert("Текст должен содаржать буквы латинского алфавита, цифры, специальные символы!");
     } else {
         alert("Пожалуйста, введите текст для штрих-кода!");
     }
