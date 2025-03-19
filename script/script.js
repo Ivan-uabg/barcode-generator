@@ -1,6 +1,7 @@
 const printButton = document.querySelector('.print-button');
 const container = document.querySelector('.barcode-list-container');
 const barcodeList = document.getElementById('barcodeList');
+const barcodeInput = document.getElementById('barcodeInput');
 
 const createIterator = () => {
     let i = 0;
@@ -25,7 +26,7 @@ function checkContainer(parent, child) {
 }
 
 function addBarcode() {
-    const input = document.getElementById('barcodeInput').value;
+    const input = barcodeInput.value;
     const barcodeList = document.getElementById('barcodeList');
     console.log(typeof(input));
     const regex = /^[\x00-\x7F]+$/;
@@ -63,7 +64,7 @@ function addBarcode() {
         deleteButton.appendChild(imgDelete);
 
         // Очищаем поле ввода
-        document.getElementById('barcodeInput').value = '';
+        barcodeInput.value = '';
 
         deleteButton.onclick = function () {
             if (this.parentElement) {
@@ -79,13 +80,14 @@ function addBarcode() {
         }
         // Проверяем контейнер после добавления
         checkContainer(container, barcodeList);
-    } else if (!input.trim()){
+    } else if (input === '') {
         alert("Пожалуйста, введите текст для штрих-кода!");
-    }
-    else if (input.length >= 30) {
+    } else if (input.length >= 30) {
         alert("Пожалуйста, введите текст до 30 символов!");
-    } else if (!regex.test(input)) {
+    } else if (!regex.test(input)){
+        barcodeInput.value = '';
         alert("Текст должен содержать буквы латинского алфавита, цифры, специальные символы!");
+        
     }
 } 
 
