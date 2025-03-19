@@ -8,6 +8,12 @@ body {
     min-height: 100vh;
 }
 
+button {
+    border: none;
+    cursor: pointer;
+    transition: transform 0.05s;
+}
+
 .input-container {
     background: white;
     padding: 20px;
@@ -27,25 +33,30 @@ input {
     border-radius: 4px;
 }
 
-button {
+.main-button {
     padding: 10px 20px;
     margin: 5px;
-    border: none;
     background-color: #007bff;
     color: white;
     border-radius: 4px;
-    cursor: pointer;
 }
 
-button:hover {
+.main-button:hover {
     background-color: #0056b3;
 }
+
+.main-button:active {
+    background-color: #0056b3;
+    transform: scale(0.9);;
+  }
 
 .barcode-list-container {
     width: 80%;
     max-width: 600px;
-    max-height: 400px; /* Ограничиваем высоту списка */
-    overflow-y: auto; /* Добавляем прокрутку */
+    max-height: 400px;
+    /* Ограничиваем высоту списка */
+    overflow-y: auto;
+    /* Добавляем прокрутку */
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -54,12 +65,51 @@ button:hover {
 }
 
 .barcode-item {
+    position: relative;
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #f9f9f9;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.delete-button {
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    width: 80px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: rgb(249, 249, 249);
+    background: linear-gradient(90deg, rgba(249,249,249,1) 0%, rgba(221,221,221,1) 50%, rgba(221,221,221,1) 100%);
+}
+
+img.img-delete {
+    width: 30px;
+    transition: width, background 0.2s;
+}
+
+.barcode-item:hover .delete-button {
+    visibility: visible;
+}
+
+.delete-button:hover {
+    background: linear-gradient(90deg, rgba(249,249,249,1) 0%, rgba(255,0,0,0.30) 100%);
+}
+
+.delete-button:hover img.img-delete {
+    width: 35px;
+}
+
+.delete-button:active img.img-delete{
+    width: 30px;
+    content: url("../img/delete_active.png");
 }
 
 .print-button {
@@ -70,19 +120,28 @@ button:hover {
     body * {
         visibility: hidden;
     }
-    .barcode-list-container, .barcode-list-container * {
+
+    .barcode-list-container,
+    .barcode-list-container * {
         visibility: visible;
     }
+
     .barcode-list-container {
         position: absolute;
         left: auto;
         top: auto;
         width: 100%;
-        
+
         max-height: none;
         overflow: visible;
     }
+
     .barcode-item {
-        page-break-inside: avoid; /* Избегаем разрыва штрих-кодов на страницах */
+        page-break-inside: avoid;
+        /* Избегаем разрыва штрих-кодов на страницах */
+    }
+
+    .delete-button * {
+        visibility: hidden;
     }
 }

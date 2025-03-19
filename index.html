@@ -10,12 +10,13 @@
     <div class="input-container">
         <h1>Генератор штрих-кодов</h1>
         <input type="text" id="barcodeInput" placeholder="Введите текст для штрих-кода">
-        <button onclick="addBarcode()">Добавить штрих-код</button>
+        <button class="main-button" onclick="addBarcode()">Добавить штрих-код</button>
     </div>
     <div class="barcode-list-container">
-        <div id="barcodeList"></div>
+        <div id="barcodeList">
+        </div>
     </div>
-    <button class="print-button" onclick="printBarcodes()">Распечатать все штрих-коды</button>
+    <button class="print-button main-button" onclick="printBarcodes()">Распечатать все штрих-коды</button>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <script src="script/script.js"></script>
 </body>
