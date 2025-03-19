@@ -78,14 +78,16 @@ function addBarcode() {
             }
         }
         // Проверяем контейнер после добавления
-        checkContainer(container, barcodeList);
+    }
+    if (input === "") {
+        alert("Пожалуйста, введите текст для штрих-кода!");
     } else if (input.length >= 30) {
         alert("Пожалуйста, введите текст до 30 символов!");
     } else if (!regex.test(input)) {
-        alert("Текст должен содаржать буквы латинского алфавита, цифры, специальные символы!");
+        alert("Текст должен содержать буквы латинского алфавита, цифры, специальные символы!");
     } else {
-        alert("Пожалуйста, введите текст для штрих-кода!");
-    }
+        checkContainer(container, barcodeList);
+    }  
 }
 
 function printBarcodes() {
