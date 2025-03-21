@@ -98,7 +98,7 @@ function addBarcode() {
         errorMessage.innerHTML = 'Текст должен содержать буквы латинского алфавита, цифры, специальные символы!';
         errorMessage.classList.add('visible');
     }
-}
+} 
 
 function printBarcodes() {
     const barcodeList = document.getElementById('barcodeList');
