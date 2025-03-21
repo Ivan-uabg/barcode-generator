@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор штрих-кодов</title>
     <link rel="stylesheet" href="style/styles.css">
+    <link rel="stylesheet" href="style/adaptive.css">
 </head>
 <body>
     <div class="input-container">
         <h1>Генератор штрих-кодов</h1>
         <input type="text" id="barcodeInput" placeholder="Введите текст для штрих-кода">
+        <span class="error-message"></span>
         <button class="main-button" onclick="addBarcode()">Добавить штрих-код</button>
     </div>
     <div class="barcode-list-container">

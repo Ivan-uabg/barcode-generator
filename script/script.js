@@ -2,6 +2,7 @@ const printButton = document.querySelector('.print-button');
 const container = document.querySelector('.barcode-list-container');
 const barcodeList = document.getElementById('barcodeList');
 const barcodeInput = document.getElementById('barcodeInput');
+const errorMessage = document.querySelector('.error-message');
 
 const createIterator = () => {
     let i = 0;
@@ -28,7 +29,6 @@ function checkContainer(parent, child) {
 function addBarcode() {
     const input = barcodeInput.value;
     const barcodeList = document.getElementById('barcodeList');
-    console.log(typeof(input));
     const regex = /^[\x00-\x7F]+$/;
     
     console.log(input.length);
@@ -66,6 +66,9 @@ function addBarcode() {
         // Очищаем поле ввода
         barcodeInput.value = '';
 
+        errorMessage.classList.remove('visible');
+        errorMessage.innerHTML = '';
+            
         deleteButton.onclick = function () {
             if (this.parentElement) {
                 this.parentElement.style.transition = 'opacity 0.3s ease';
@@ -81,13 +84,19 @@ function addBarcode() {
         // Проверяем контейнер после добавления
         checkContainer(container, barcodeList);
     } else if (input === '') {
-        alert("Пожалуйста, введите текст для штрих-кода!");
+        //alert("Пожалуйста, введите текст для штрих-кода!");
+        errorMessage.classList.add('visible');
+        errorMessage.innerHTML = 'Пожалуйста, введите текст для штрих-кода!';
     } else if (input.length >= 30) {
-        alert("Пожалуйста, введите текст до 30 символов!");
+        barcodeInput.value = '';
+        //alert("Пожалуйста, введите текст до 30 символов!");
+        errorMessage.innerHTML = 'Пожалуйста, введите текст до 30 символов!';
+        errorMessage.classList.add('visible');
     } else if (!regex.test(input)){
         barcodeInput.value = '';
-        alert("Текст должен содержать буквы латинского алфавита, цифры, специальные символы!");
-        
+        //alert("Текст должен содержать буквы латинского алфавита, цифры, специальные символы!");
+        errorMessage.innerHTML = 'Текст должен содержать буквы латинского алфавита, цифры, специальные символы!';
+        errorMessage.classList.add('visible');
     }
 }
 

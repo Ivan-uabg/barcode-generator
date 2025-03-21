@@ -1,0 +1,21 @@
+@media (hover: none) and (pointer: coarse) {
+    /* ... */
+    button.delete-button {
+        visibility: visible;
+        width: 35px;
+        opacity: 0.3;
+        text-align: end;
+    }
+
+    img.img-delete {
+        width: 30px;
+    }
+
+    .delete-button:hover img.img-delete {
+        width: 30px;
+    }
+
+    .delete-button:active {
+        opacity: 1;
+    }
+}
