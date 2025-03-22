@@ -31,7 +31,7 @@ function addBarcode() {
     const barcodeList = document.getElementById('barcodeList');
     const regex = /^[\x00-\x7F]+$/;
     
-    console.log(input.length);
+    console.log(`Input length = ${input.length}`);
     
     if (regex.test(input) && input.length <= 30) {
         // Создаем контейнер для нового штрих-кода
@@ -53,10 +53,10 @@ function addBarcode() {
             fontSize: 16,
             lineColor: "#000",
             width: 2,
+            // text: `SRA ${input}`,
             height: 100,
         });
         
-        console.log(barcodeItem.classList);
         // Добавляем SVG в контейнер
         barcodeItem.appendChild(svg);
         barcodeList.appendChild(barcodeItem);
@@ -68,7 +68,7 @@ function addBarcode() {
 
         errorMessage.classList.remove('visible');
         errorMessage.innerHTML = '';
-            
+
         deleteButton.onclick = function () {
             if (this.parentElement) {
                 this.parentElement.style.transition = 'opacity 0.3s ease';
@@ -76,10 +76,15 @@ function addBarcode() {
                 setTimeout(() => { 
                         this.parentElement.remove();
                         checkContainer(container, barcodeList);
+                        if (barcodeList.children.length === 0) {
+                            errorMessage.classList.remove('visible');
+                            errorMessage.innerHTML = '';
+                        };
                     }, 300);
             } else {
                 console.error('Родительский элемент не найден');
             }
+            
         }
         // Проверяем контейнер после добавления
         checkContainer(container, barcodeList);
@@ -90,7 +95,7 @@ function addBarcode() {
     } else if (input.length >= 30) {
         barcodeInput.value = '';
         //alert("Пожалуйста, введите текст до 30 символов!");
-        errorMessage.innerHTML = 'Пожалуйста, введите текст до 30 символов!';
+        errorMessage.innerHTML = `Пожалуйста, введите текст до 30 символов! Ваш текст содержит ${input.length} символов.`;
         errorMessage.classList.add('visible');
     } else if (!regex.test(input)){
         barcodeInput.value = '';
